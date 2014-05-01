@@ -1,7 +1,7 @@
 {
-  "name": "yell.io",
+  "name": "yellio",
   "version": "0.0.0",
-  "description": "webapp",
+  "description": "yellio",
   "private": true,
   "directories": {
     "test": "test"
