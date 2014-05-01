@@ -1,1 +1,5 @@
 h1 Yell.io
+h2 Availiable rooms:
+ul
+  li(ng-repeat="room in rooms")
+    a(ng-href="#/r/{{room.name}}") {{room.name}} : {{room.numberOfUsers}}

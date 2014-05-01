@@ -8,7 +8,7 @@ angular.module('yellio', [
     $routeProvider
       .when '/',
         templateUrl: 'partials/home.html'
-        controller: 'MainCtrl'
+        controller: 'HomeCtrl'
       .when '/r/:name',
         templateUrl: 'partials/room.html'
         controller: 'RoomCtrl'

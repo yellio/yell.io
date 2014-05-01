@@ -1,1 +1,14 @@
-h1 Room {{name}}
+a(ng-href="#") home
+h1 Room {{roomName}}
+h2 your name: {{user.name}}
+
+form(name="loginForm", ng-show="formShown", ng-submit="joinRoom()")
+  label name
+  input(type="text", ng-model="username", ng-pattern="/^\\s*\\w*\\s*$/", required, name="username")
+  span.error(ng-show="loginForm.username.$error.required") Required!
+  span.error(ng-show="loginForm.username.$error.pattern") Single word only!
+
+h2 Users:
+ul
+  li(ng-repeat="(user, res) in room")
+    p {{user}}
