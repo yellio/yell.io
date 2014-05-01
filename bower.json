@@ -20,6 +20,7 @@
     "angular-loader": "~1.2.16",
     "angular-resource": "~1.2.16",
     "angular-animate": "~1.2.16",
-    "angular-cookies": "~1.2.16"
+    "angular-cookies": "~1.2.16",
+    "socket.io-client": "~1.0.0"
   }
 }
