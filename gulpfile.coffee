@@ -22,6 +22,7 @@ paths =
   partials:  'src/partials/**/*.jade'
   styles:    'src/styles/**/*.styl'
   images:    'src/images/**/*'
+  fonts:     'src/fonts/**/*'
   scripts:   'src/scripts/**/*.coffee'
   index:     'src/index.jade'
 
@@ -64,6 +65,10 @@ gulp.task 'images-dev', ->
   gulp.src paths.images
     .pipe gulp.dest 'app/images'
     .pipe connect.reload()
+
+gulp.task 'fonts', ->
+  gulp.src paths.fonts
+    .pipe gulp.dest 'app/fonts'
 
 gulp.task 'partials', ->
   gulp.src paths.partials
@@ -120,6 +125,6 @@ gulp.task 'watch', ->
   gulp.watch paths.images   , ['images-dev']
   gulp.watch paths.index    , ['index-dev']
 
-gulp.task 'build'   , ['scripts'     , 'styles'     , 'images'     , 'partials', 'copy-bower', 'index']
-gulp.task 'compile' , ['scripts-dev' , 'styles-dev' , 'images-dev' , 'partials-dev', 'index-dev']
+gulp.task 'build'   , ['scripts'     , 'styles'     , 'images'     , 'partials', 'copy-bower', 'fonts', 'index']
+gulp.task 'compile' , ['scripts-dev' , 'styles-dev' , 'images-dev' , 'partials-dev', 'fonts', 'index-dev']
 gulp.task 'default' , ['serve']
