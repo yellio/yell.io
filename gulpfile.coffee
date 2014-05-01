@@ -105,7 +105,7 @@ gulp.task 'copy-bower', ->
   gulp.src 'app/bower_components/**/*'
     .pipe gulp.dest 'dist/bower_components'
 
-gulp.task 'serve', ->
+gulp.task 'serve', ['compile', 'watch'], ->
   connect.server
     port       : 1337
     root       : 'app'
@@ -118,7 +118,8 @@ gulp.task 'watch', ->
   gulp.watch paths.styles   , ['styles-dev']
   gulp.watch paths.scripts  , ['scripts-dev']
   gulp.watch paths.images   , ['images-dev']
+  gulp.watch paths.index    , ['index-dev']
 
 gulp.task 'build'   , ['scripts'     , 'styles'     , 'images'     , 'partials', 'copy-bower', 'index']
 gulp.task 'compile' , ['scripts-dev' , 'styles-dev' , 'images-dev' , 'partials-dev', 'index-dev']
-gulp.task 'default' , ['compile'     , 'watch'      , 'serve']
+gulp.task 'default' , ['serve']
