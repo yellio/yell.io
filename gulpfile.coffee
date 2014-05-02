@@ -116,7 +116,7 @@ gulp.task 'serve', ['compile', 'watch'], ->
     root       : 'app'
     livereload : yes
 
-  open 'http://localhost:1337', 'safari'
+  open 'http://localhost:1337'
 
 gulp.task 'watch', ->
   gulp.watch paths.partials , ['partials-dev']
