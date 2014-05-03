@@ -8,7 +8,19 @@ form(name="loginForm", ng-show="formShown", ng-submit="joinRoom()")
   span.error(ng-show="loginForm.username.$error.required") Required!
   span.error(ng-show="loginForm.username.$error.pattern") Single word only!
 
+local-video
+
+h2 Videos:
+div(ng-repeat="videoSrc in videos")
+  p {{videoSrc}}
+  video(autoplay, ng-src="{{videoSrc}}")
+
 h2 Users:
 ul
   li(ng-repeat="(user, res) in room")
     p {{user}}
+
+h2 messages:
+div(ng-repeat="message in messages")
+  p {{message}}
+
