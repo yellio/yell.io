@@ -1,5 +1,14 @@
 h1 Yell.io
-h2 Availiable rooms:
+
+h2 Chreate room
+form(name="createRoomForm" ng-submit="createRoom()")
+  label name
+  input(type="text", ng-model="roomName", ng-pattern="/^\\s*\\w*\\s*$/", required, name="roomName")
+  span.error(ng-show="createRoomForm.$error.required") Required!
+  span.error(ng-show="createRoomForm.$error.pattern") Single word only!
+  button(ng-show="createRoomForm.$valid") create
+
+h2(ng-show="rooms") Join room:
 ul
   li(ng-repeat="room in rooms")
     a(ng-href="#/r/{{room.name}}") {{room.name}} : {{room.numberOfUsers}}
