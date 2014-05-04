@@ -5,23 +5,20 @@ angular.module('yellio')
     $scope.localVideoSrc = ''
     $scope.user = {}
     $scope.remoteVideos = []
+    $scope.roomName = $routeParams.name
 
     rtc.prepareToCall (err, localVideoUrl) ->
       $scope.$apply ->
-        if err
-          $scope.cameraError = yes
-        else
-          $scope.localVideoSrc = localVideoUrl
+        if err then $scope.cameraError = yes
+        else $scope.localVideoSrc = localVideoUrl
 
     $scope.joinRoom = ->
       if $scope.loginForm.username.$valid
         $scope.user.name = $scope.username
         socket.emit 'join room',
           name: $scope.user.name
-          room: $routeParams.name
+          room: $scope.roomName
           description: 'desc'
-        $scope.formShown = no
-
 
     socket.on 'room info', (room) ->
       $scope.room = room
@@ -38,5 +35,4 @@ angular.module('yellio')
     rtc.onCall = rtc.acceptCall
 
     rtc.onCallStarted = (videoUrl) ->
-      $scope.$apply ->
-        $scope.remoteVideos.push videoUrl
+      $scope.remoteVideos.push videoUrl

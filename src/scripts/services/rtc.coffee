@@ -59,6 +59,8 @@ angular.module('yellio')
 
     @onCall = ->
 
+    @onHang = ->
+
     @onCallStarted = ->
 
     @rejectCall = -> alert 'call rejected'
