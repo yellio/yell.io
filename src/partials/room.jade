@@ -1,26 +1,19 @@
-a(ng-href="#") home
-h1 Room {{roomName}}
-h2 your name: {{user.name}}
+h1(ng-show="!localVideoSrc && !cameraError") Please allow app to use you webcam and microphone
+h1.error(ng-show="cameraError") Can't get access to your webcam! Refresh the page and garant access to your webcam
 
-form(name="loginForm", ng-show="formShown", ng-submit="joinRoom()")
-  label name
-  input(type="text", ng-model="username", ng-pattern="/^\\s*\\w*\\s*$/", required, name="username")
-  span.error(ng-show="loginForm.username.$error.required") Required!
-  span.error(ng-show="loginForm.username.$error.pattern") Single word only!
+div(ng-show="localVideoSrc && !cameraError")
 
-local-video
+  a(ng-href="#") home
+  h1 Room {{roomName}}
+  h2 your name: {{user.name}}
 
-h2 Videos:
-div(ng-repeat="videoSrc in videos")
-  p {{videoSrc}}
-  video(autoplay, ng-src="{{videoSrc}}")
+  form(name="loginForm", ng-show="!user.name", ng-submit="joinRoom()")
+    label name
+    input(type="text", ng-model="username", ng-pattern="/^\\s*\\w*\\s*$/", required, name="username")
+    span.error(ng-show="loginForm.username.$error.required") Required!
+    span.error(ng-show="loginForm.username.$error.pattern") Single word only!
 
-h2 Users:
-ul
-  li(ng-repeat="(user, res) in room")
-    p {{user}}
+  local-video
 
-h2 messages:
-div(ng-repeat="message in messages")
-  p {{message}}
-
+  div(ng-repeat="videoSrc in remoteVideos")
+    video(autoplay, ng-src="{{videoSrc}}")

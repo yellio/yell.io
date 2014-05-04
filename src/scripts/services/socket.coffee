@@ -1,6 +1,6 @@
 angular.module('yellio')
   .factory 'socket', ($rootScope) ->
-    socket = io.connect '192.168.1.3:3000'
+    socket = io.connect 'ws://192.168.1.3:3000'
 
     on: (event, cb) ->
       socket.on event, ->

@@ -1,5 +1,5 @@
 angular.module('yellio')
-  .directive 'localVideo', (ngRTC, $sce) ->
+  .directive 'localVideo', ->
     templateUrl: 'partials/local-video.html'
     restrict: 'E'
     link: (scope, element, attrs) ->
