@@ -12,6 +12,7 @@ div(ng-show="localVideoSrc && !cameraError")
     input(type="text", ng-model="username", ng-pattern="/^\\s*\\w*\\s*$/", required, name="username")
     span.error(ng-show="loginForm.username.$error.required") Required!
     span.error(ng-show="loginForm.username.$error.pattern") Single word only!
+    button(ng-show="loginForm.$valid") Join!
 
   local-video
 
