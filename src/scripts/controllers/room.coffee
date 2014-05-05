@@ -18,19 +18,16 @@ angular.module('yellio')
         socket.emit 'join room',
           name: $scope.user.name
           room: $scope.roomName
-          description: 'desc'
 
     socket.on 'room info', (room) ->
       $scope.room = room
-      numberOfUsers = Object.keys(room).length
-      if numberOfUsers > 1
-        rtc.initiateCall()
 
     socket.on 'user joined', (user) ->
-      $scope.room[user.name] = user.resources
+      $scope.room[user.name] = user.id
+      rtc.initiateCall(user.name)
 
-    socket.on 'user disconnected', (username) ->
-      delete $scope.room[username]
+    socket.on 'user disconnected', (name) ->
+      delete $scope.room[name]
 
     rtc.onCall = rtc.acceptCall
 
