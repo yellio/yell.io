@@ -22,10 +22,8 @@ angular.module('yellio')
       navigator.getUserMedia resources, successCallback, errorCallback
 
 
-    #Peer Connection initialization
-
     class Peer
-      constructor: ->
+      constructor: (@username) ->
         @pc = new PeerConnection(iceServers: [url: "stun:stun.l.google.com:19302"])
         @pc.addStream localStream
 
@@ -33,7 +31,7 @@ angular.module('yellio')
           if (!@pc || !event || !event.candidate)
             return
           candidate = event.candidate
-          socket.emit 'send candidate', candidate
+          socket.emit 'send candidate', {candidate:candidate, username: @username}
         ).bind this
 
         socket.on 'ice candidate', ((candidate) ->
@@ -54,26 +52,26 @@ angular.module('yellio')
       call: ->
         @pc.createOffer ((desc) ->
           @pc.setLocalDescription desc
-          socket.emit 'call request', desc
+          socket.emit 'call request', {desc: desc, username: @username}
         ).bind this
 
       answer: (offerDesc) ->
         @pc.setRemoteDescription new SessionDescription(offerDesc)
         @pc.createAnswer ((desc) ->
           @pc.setLocalDescription desc
-          socket.emit 'call accept', desc
+          socket.emit 'call accept', {desc: desc, username: @username}
         ).bind this
 
 
-    socket.on 'incoming call', (desc) ->
-      self.onCall desc
+    socket.on 'incoming call', (data) ->
+      self.onCall data
 
-    @acceptCall = (offerDesc) ->
-      peer = new Peer
-      peer.answer(offerDesc)
+    @acceptCall = (offer) ->
+      peer = new Peer offer.username
+      peer.answer(offer.desc)
 
-    @initiateCall = ->
-      peer = new Peer
+    @initiateCall = (username) ->
+      peer = new Peer username
       peer.call()
 
     @onCall = ->
@@ -82,7 +80,7 @@ angular.module('yellio')
 
     @onCallStarted = ->
 
-    @rejectCall = -> alert 'call rejected'
+    @rejectCall = ->
 
     @prepareToCall = (cb) ->
       self.getLocalMediaStream {audio: yes, video: yes}, (err, stream) ->
