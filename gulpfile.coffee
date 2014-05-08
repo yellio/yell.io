@@ -78,10 +78,11 @@ gulp.task 'index', ['scripts', 'styles'], ->
 # Launch server and open app in default browser
 gulp.task 'serve', ['compile', 'watch'], ->
   connect.server
+    https      : yes
     port       : 1337
     root       : 'app'
     livereload : yes
-  open 'http://localhost:1337'
+  open 'https://localhost:1337'
 
 # Clean development build folder
 gulp.task 'clean', ->
