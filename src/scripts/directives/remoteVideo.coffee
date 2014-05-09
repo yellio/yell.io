@@ -1,6 +1,6 @@
 angular.module('yellio')
-  .directive 'localVideo', ->
-    templateUrl: 'partials/local-video.html'
+  .directive 'remoteVideo', ->
+    templateUrl: 'partials/remote-video.html'
     restrict: 'AE'
     replace: yes
     scope:
