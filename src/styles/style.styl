@@ -6,14 +6,47 @@ body
 
 .error
   color red
-
-video.local
-  width 15%
-  top 150px
-  right 30px
-  position fixed
-
+  
 video
   width 35%
   margin 15px
   float left
+
+.flip-container
+  -webkit-perspective 800
+  position fixed
+  top 100px
+  right 50px 
+
+.flip-container:hover .flipper, .flip-container.hover .flipper
+  -webkit-transform: rotateY(180deg)
+
+.flipper
+  -webkit-transition 1.0s
+  -webkit-transform-style preserve-3d
+  position relative
+
+.flip-container, .front, .back
+  width 200px
+  height 150px
+
+.front, .back
+  -webkit-backface-visibility hidden
+  position absolute
+  -webkit-transition 1.0s
+  -webkit-transform-style preserve-3d
+  top 0
+  left 0 
+  margin 0
+
+.back
+  -webkit-transform rotateY(180deg)
+  background brown
+  
+.front
+  -webkit-transform rotateY(0deg)
+  z-index: 2
+
+ 
+
+	

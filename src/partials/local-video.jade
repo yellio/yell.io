@@ -1,1 +1,4 @@
-video.local(autoplay, muted, ng-src="{{videoSrc}}")
+div.flip-container
+	div.flipper
+		video.front(autoplay, muted, ng-src="{{videoSrc}}")
+		div.back: input(type = "button" value = "button")
