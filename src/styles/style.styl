@@ -6,24 +6,24 @@ body
 
 .error
   color red
-  
+
 video
   width 35%
   margin 15px
   float left
 
 .flip-container
-  -webkit-perspective 800
+  perspective 800
   position fixed
   top 100px
-  right 50px 
+  right 50px
 
 .flip-container:hover .flipper, .flip-container.hover .flipper
-  -webkit-transform: rotateY(180deg)
+  transform: rotateY(180deg)
 
 .flipper
-  -webkit-transition 1.0s
-  -webkit-transform-style preserve-3d
+  transition 1.0s
+  transform-style preserve-3d
   position relative
 
 .flip-container, .front, .back
@@ -31,22 +31,18 @@ video
   height 150px
 
 .front, .back
-  -webkit-backface-visibility hidden
+  backface-visibility hidden
   position absolute
-  -webkit-transition 1.0s
-  -webkit-transform-style preserve-3d
+  transition 1.0s
+  transform-style preserve-3d
   top 0
-  left 0 
+  left 0
   margin 0
 
 .back
-  -webkit-transform rotateY(180deg)
-  background brown
-  
+  transform rotateY(180deg)
+  background grey
+
 .front
-  -webkit-transform rotateY(0deg)
+  transform rotateY(0deg)
   z-index: 2
-
- 
-
-	

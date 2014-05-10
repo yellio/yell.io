@@ -13,6 +13,7 @@ inject     = require 'gulp-inject'
 connect    = require 'gulp-connect'
 imagemin   = require 'gulp-imagemin'
 bowerFiles = require 'gulp-bower-files'
+prefix     = require 'gulp-autoprefixer'
 
 
 paths =
@@ -40,6 +41,7 @@ gulp.task 'scripts', ->
 gulp.task 'styles', ->
   gulp.src paths.styles
     .pipe stylus()
+    .pipe prefix('last 1 version')
     .pipe gulp.dest 'app/styles'
     .pipe connect.reload()
 
@@ -105,6 +107,7 @@ gulp.task 'scripts:prod', ->
 gulp.task 'styles:prod', ->
   gulp.src paths.styles
     .pipe stylus()
+    .pipe prefix('last 1 version')
     .pipe concat 'style.css'
     .pipe gulp.dest 'dist/styles'
 
