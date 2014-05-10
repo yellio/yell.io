@@ -4,3 +4,4 @@ angular.module('yellio')
     restrict: 'AE'
     scope:
       videoSrc: '=source'
+      shareScreen: '&sharescreen'

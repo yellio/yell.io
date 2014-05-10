@@ -2,15 +2,18 @@ angular.module('yellio')
   .controller 'RoomCtrl', ($scope, $routeParams, socket, rtc, $sce) ->
 
     $scope.cameraError = no
-    $scope.localVideoSrc = ''
     $scope.user = {}
     $scope.remoteVideos = {}
+    $scope.remoteScreens = {}
     $scope.roomName = $routeParams.name
 
-    rtc.prepareToCall (err, localVideoUrl) ->
+    $scope.$on '$destroy', ->
+      socket.emit 'leave room'
+
+    rtc.getWebcamStream (err, webcamStream) ->
       $scope.$apply ->
         if err then $scope.cameraError = yes
-        else $scope.localVideoSrc = localVideoUrl
+        else $scope.localVideoSrc = rtc.getStreamUrl webcamStream
 
     $scope.joinRoom = ->
       if $scope.loginForm.username.$valid
@@ -29,9 +32,18 @@ angular.module('yellio')
     socket.on 'user disconnected', (username) ->
       delete $scope.room[username]
       delete $scope.remoteVideos[username]
+      delete $scope.remoteScreens[username]
 
     rtc.onCall = rtc.acceptCall
 
     rtc.onCallStarted = (callData) ->
       url = rtc.getStreamUrl callData.stream
-      $scope.remoteVideos[callData.username] = url
+      $scope.$apply ->
+        $scope.remoteVideos[callData.username] = url
+
+    rtc.onScreenShare = (data) ->
+      url = rtc.getStreamUrl data.stream
+      $scope.$apply ->
+        $scope.remoteScreens[data.username] = url
+
+    $scope.shareScreen = rtc.shareScreen

@@ -14,7 +14,10 @@ div(ng-show="localVideoSrc && !cameraError")
     span.error(ng-show="loginForm.username.$error.pattern") Single word only!
     button(ng-show="loginForm.$valid") Join!
 
-  local-video(source="localVideoSrc")
+  local-video(source="localVideoSrc" sharescreen="shareScreen()")
 
   div(ng-repeat="(name, url) in remoteVideos")
+    remote-video(source="url")
+
+  div(ng-repeat="(name, url) in remoteScreens")
     remote-video(source="url")
