@@ -16,5 +16,5 @@ div(ng-show="localVideoSrc && !cameraError")
 
   local-video(source="localVideoSrc")
 
-  div(ng-repeat="videoSrc in remoteVideos")
-    remote-video(source="videoSrc")
+  div(ng-repeat="(name, url) in remoteVideos")
+    remote-video(source="url")

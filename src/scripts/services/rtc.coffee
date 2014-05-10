@@ -38,16 +38,17 @@ angular.module('yellio')
           @pc.addIceCandidate new RTCIceCandidate(candidate)
         ).bind this
 
-
         socket.on 'call accepted', ((desc) ->
           @pc.setRemoteDescription new RTCSessionDescription(desc)
         ).bind this
 
-
         @pc.onaddstream = ((event) ->
           return unless event
-          self.onCallStarted self.getStreamUrl(event.stream)
+          self.onCallStarted
+            stream: event.stream
+            username: @username
         ).bind this
+
 
       call: ->
         @pc.createOffer ((desc) ->
