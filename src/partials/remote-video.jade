@@ -1,1 +1,7 @@
-video.remote(autoplay, ng-src="{{videoSrc}}")
+video.remote(
+  autoplay
+  ng-class="{fullscreen: fullScreen}"
+  ng-click="toggleFullScreen()"
+  ng-src="{{videoSrc}}"
+  ng-show="!(this.readyState <= HTMLMediaElement.HAVE_CURRENT_DATA || this.paused || this.currentTime <= 0)"
+)
