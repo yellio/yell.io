@@ -6,11 +6,11 @@ div(ng-show="localVideoSrc && !cameraError")
   a(ng-href="#") home
   h1 Room {{roomName}}
 
-  form.center(name="loginForm", ng-show="!user.name", ng-submit="joinRoom()")
+  div.cont: form(name="loginForm", ng-show="!user.name", ng-submit="joinRoom()")
     label name
     input(type="text", ng-model="username", ng-pattern="/^\\s*\\w*\\s*$/", required, name="username")
     span.error(ng-show="loginForm.username.$error.required") Required!
-    span.error(ng-show="loginForm.username.$error.pattern") Single word only!
+    span.cont.error(ng-show="loginForm.username.$error.pattern") Single word only!
     button(ng-show="loginForm.$valid") join!
 
   local-video(source="localVideoSrc" sharescreen="shareScreen()")
