@@ -60,26 +60,22 @@ angular.module('yellio')
         @pc.addStream localWebcamStream
         @pc.addStream localScreenShareStream if localScreenShareStream
 
-        @pc.onicecandidate = ((event) ->
+        @pc.onicecandidate = (event) =>
           if (!@pc || !event || !event.candidate) then return
           if (event.switching) then return
           candidate = event.candidate
           socket.emit 'send candidate', {candidate:candidate, username: @username}
-        ).bind this
 
-        socket.on 'ice candidate', ((candidate) ->
+        socket.on 'ice candidate', (candidate) =>
           @pc.addIceCandidate new RTCIceCandidate(candidate)
-        ).bind this
 
-        socket.on 'call accepted', ((desc) ->
+        socket.on 'call accepted', (desc) =>
           @pc.setRemoteDescription new RTCSessionDescription(desc)
-        ).bind this
 
-        socket.on 'renegotiation', ((data) ->
+        socket.on 'renegotiation', (data) =>
           @answer(data.desc)
-        ).bind this
 
-        @pc.onaddstream = ((event) ->
+        @pc.onaddstream = (event) =>
           return unless event
           if @isCalling
             self.onScreenShare
@@ -90,27 +86,23 @@ angular.module('yellio')
             self.onCallStarted
               stream: event.stream
               username: @username
-        ).bind this
 
 
       call: ->
-        @pc.createOffer ((desc) ->
+        @pc.createOffer (desc) =>
           @pc.setLocalDescription desc
           socket.emit 'call request', {desc: desc, username: @username}
-        ).bind this
 
       renegotiate: ->
-        @pc.createOffer ((desc) ->
+        @pc.createOffer (desc) =>
           @pc.setLocalDescription desc
           socket.emit 'renegotiation request', {desc: desc, username: @username}
-        ).bind this
 
       answer: (offerDesc) ->
         @pc.setRemoteDescription new SessionDescription(offerDesc)
-        @pc.createAnswer ((desc) ->
+        @pc.createAnswer (desc) =>
           @pc.setLocalDescription desc
           socket.emit 'call accept', {desc: desc, username: @username}
-        ).bind this
 
 
     socket.on 'incoming call', (data) ->
