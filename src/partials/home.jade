@@ -1,14 +1,15 @@
 h1.logo.center Yell.io
 
-.center
+  h2.center create a room
 
-  h2 create a room
 
-  form(name="createRoomForm" ng-submit="createRoom()")
+  div.cont: form(name="createRoomForm" ng-submit="createRoom()")
     label name
     input(type="text" ng-model="roomName" ng-pattern="/^\\s*\\w*\\s*$/" autofocus required name="roomName" ng-class="{error: createRoomForm.$error.pattern}")
-    span.error(ng-show="createRoomForm.$error.pattern") Single word only!
+    span.cont.error(ng-show="createRoomForm.$error.pattern") Single word only!
     button(ng-show="createRoomForm.$valid") create
+
+.center
 
   h2(ng-show="rooms") or join one:
 
