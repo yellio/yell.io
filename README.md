@@ -6,6 +6,7 @@ Yell.io
 ### Instal dependencies
 ```sh
 npm install
+bower install
 ```
 
 ## Build
